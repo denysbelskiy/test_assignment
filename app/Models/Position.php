@@ -11,7 +11,7 @@ class Position extends Model
 
     protected $fillable = ['name'];
 
-    public function talents()
+    public function users()
     {
         return $this->hasMany(User::class);
     }
