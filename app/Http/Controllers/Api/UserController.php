@@ -12,13 +12,8 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-
-    // ToDo: use LengthAwarePaginator to be able to set items per page
-
     public function index (Request $request)
     {
-        $count = $request->query('count', 5);
-        $page = $request->query('page', 1);
 
         try {
             $request->validate([
@@ -33,7 +28,19 @@ class UserController extends Controller
             ], 422);
         }
 
-        return new UserCollection(User::paginate(request('count', $count)));
+        $count = $request->query('count', 5);
+
+        $users = User::orderBy('id', 'asc')->paginate($count);
+        $users->appends(['count' => $count]);
+
+        if ($users->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Page not found',
+            ], 404);
+        }
+
+        return new UserCollection($users);
     }
 
     public function show (string $id)
