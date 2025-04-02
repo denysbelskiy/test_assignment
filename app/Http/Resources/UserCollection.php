@@ -7,12 +7,6 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserCollection extends ResourceCollection
 {
-//   "total_pages": 5,
-//   "total_users": 46,
-//   "count": 6,
-//   "page": 5,
-//   "link
-
     private $pagination;
 
     public function __construct($resource)
@@ -30,9 +24,12 @@ class UserCollection extends ResourceCollection
                 ],
 
         ];
+        
+        $resource = $resource->getCollection();
 
         parent::__construct($resource);
     }
+
     /**
      * Transform the resource collection into an array.
      *
@@ -43,9 +40,9 @@ class UserCollection extends ResourceCollection
         $data = [
             'success' => true,
             'page' => $this->pagination['current_page'],
-            'count' => $this->pagination['per_page'],
             'total_pages' => $this->pagination['last_page'],
             'total_users' => $this->pagination['total_users'],
+            'count' => $this->pagination['per_page'],
             'links' => $this->pagination['links'],
             'users' => $this->collection,
         ];
