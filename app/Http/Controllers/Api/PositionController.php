@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PositionCollection;
+use App\Http\Resources\PositionResource;
 
 class PositionController extends Controller
 {
@@ -21,6 +22,9 @@ class PositionController extends Controller
             ], 404);
         }
 
-        return new PositionCollection($positions);
+        return response()->json([
+            'success' => true,
+            'positions' => PositionResource::collection($positions),
+        ]);
     }
 }
