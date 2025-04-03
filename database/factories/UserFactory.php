@@ -27,7 +27,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->freeEmail(),
-            'phone' => fake()->regexify('^\+380[3-9][0-9]{8}$'),
+            'phone' => fake()->regexify('^\380[3-9][0-9]{8}$'),
             'photo' => App::make('image.service')->fetchAndStoreImage(),
             'position_id' => Position::inRandomOrder()->first()->id,
         ];
