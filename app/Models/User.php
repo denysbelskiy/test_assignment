@@ -23,7 +23,6 @@ class User extends Authenticatable
         'email',
         'phone',
         'position_id',
-        'photo',
     ];
 
     /**
@@ -46,6 +45,11 @@ class User extends Authenticatable
     public function position()
     {
         return $this->belongsTo(Position::class);
+    }
+
+    public function userPhoto()
+    {
+        return $this->hasOne(UserPhoto::class);
     }
 
     public function getPhotoUrl()

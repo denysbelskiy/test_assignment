@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Models\Position;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -24,7 +25,15 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->foreignIdFor(Position::class)->constrained();
-            $table->string('photo')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('users_photos', function (Blueprint $table) {
+            $table->id();
+            $table->string('original_name');
+            $table->string('path_to_original');
+            $table->string('path');
+            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
