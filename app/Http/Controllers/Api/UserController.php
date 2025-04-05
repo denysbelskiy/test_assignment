@@ -8,12 +8,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
+use App\Services\ImageOptimizationService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 
 class UserController extends Controller
 {
+    public function __construct(private ImageOptimizationService $imageOptimizationService){}
+
     public function index (Request $request)
     {
         $request->validate([
@@ -67,14 +70,22 @@ class UserController extends Controller
     {
         $validated = $request->validated();
         
-        $photoPath = Storage::disk('public')->put('images/users', $validated['photo']);
-
+        $originalPhotoName = $validated['photo']->getClientOriginalName();
+        $originalPhotoPath = Storage::disk('public')->put('images/users/original', $validated['photo']);
+        $optimizedPhotoPath = $this->imageOptimizationService->optimizeAndResize($originalPhotoPath);
+                
         $user = User::create([
             'name' => $validated['name'],
             'email' => strtolower($validated['email']),
             'phone' => $validated['phone'],
             'position_id' => $validated['position_id'],
-            'photo' => $photoPath,
+        ]);
+
+        $user->userPhoto()->create([
+            'original_name' => $originalPhotoName,
+            'path_to_original' => $originalPhotoPath,
+            'path' => $optimizedPhotoPath,
+            'user_id' => $user->id,
         ]);
 
         return response()->json([

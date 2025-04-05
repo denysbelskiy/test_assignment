@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,14 +48,5 @@ class User extends Authenticatable
     public function userPhoto()
     {
         return $this->hasOne(UserPhoto::class);
-    }
-
-    public function getPhotoUrl()
-    {
-        if ($this->photo) {
-            return asset(Storage::url($this->photo));
-        }
-
-        return null;
     }
 }
