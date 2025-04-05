@@ -28,7 +28,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('users_photos', function (Blueprint $table) {
+        Schema::create('user_photos', function (Blueprint $table) {
             $table->id();
             $table->string('original_name');
             $table->string('path_to_original');
