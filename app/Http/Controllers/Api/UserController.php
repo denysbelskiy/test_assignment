@@ -10,8 +10,6 @@ use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
 use App\Services\ImageOptimizationService;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\ValidationException;
-
 
 class UserController extends Controller
 {

@@ -36,6 +36,13 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
+
+        Schema::create('tokens', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->timestamp('expires_at');
+            $table->boolean('used')->default(false);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -43,7 +50,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
         Schema::dropIfExists('positions');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('user_photos');
+        Schema::dropIfExists('tokens');
     }
 };
