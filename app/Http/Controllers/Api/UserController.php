@@ -5,15 +5,26 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
 use App\Services\ImageOptimizationService;
 use Illuminate\Support\Facades\Storage;
 
-class UserController extends Controller
+class UserController extends Controller implements HasMiddleware
 {
-    public function __construct(private ImageOptimizationService $imageOptimizationService){}
+    public function __construct(private ImageOptimizationService $imageOptimizationService)
+    {
+    }
+
+    public static function middleware()
+    {
+        return [ 
+            new Middleware ('token-validated', only: ['store']),
+        ];
+    }
 
     public function index (Request $request)
     {
