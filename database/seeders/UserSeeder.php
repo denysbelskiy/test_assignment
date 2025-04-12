@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(4)
+        User::factory(45)
             ->has(
                 UserPhoto::factory()
                     ->state(function (array $attributes, User $user) {
