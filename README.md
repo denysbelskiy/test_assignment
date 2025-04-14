@@ -44,10 +44,10 @@ This repository contains the solution for the PHP Developer Test Assignment prov
 - PHP 8
 - Laravel 12
 - MySQL
-- TinyPNG API
+- [TinyPNG API](https://tinypng.com/)
 - Laravel Faker
-- https://thispersondoesnotexist.com/ for fake images
-- HTML & Tailwind 4 & JavaScript for frontend
+- [ThisPersonDoesNotExist](https://thispersondoesnotexist.com/) for fake images
+- HTML & Tailwind & JavaScript for frontend
 
 ## 🛠 Setup & Installation
 
