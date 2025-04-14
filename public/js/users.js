@@ -161,7 +161,7 @@ async function storeUser(formEl) {
 fetchUsers(count, page);
 fetchPositions();
 showMoreEl.addEventListener('click', () => {
-    fetchUsers(count, page++);
+    fetchUsers(count, ++page);
 });
 getTokenEl.addEventListener('click', () => {
     fetchToken();
