@@ -39,8 +39,8 @@
 
       <!-- Members List -->
       <div class="lg:w-2/3 w-full flex items-center justify-center">
-        <div class="overflow-y-auto h-full w-full pt-6 pb-18">
-            <div id="users-container" class="grid grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
+        <div class="overflow-y-auto h-full w-full pt-6 pb-18 flex flex-col">
+            <div id="users-container" class="grid grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center m-auto">
                 <div id="users-error-message" class="bg-[#1e293b] text-red-800 col-span-3 text-2xl mb-7 p-6 rounded-xl w-full max-w-md space-y-4 hidden">
                 </div>
             </div>
