@@ -147,7 +147,7 @@ async function storeUser(formEl) {
         if (response.ok) {
             hideFormError();
             let alertContent = await response.json();
-            alert(alertContent);
+            alert(alertContent.message);
             formEl.reset();
         } else {
             const errorData = await response.json();
