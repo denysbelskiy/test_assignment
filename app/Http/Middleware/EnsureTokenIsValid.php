@@ -2,11 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use App\Models\Token;
+use Closure;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Contracts\Encryption\DecryptException;
 
 class EnsureTokenIsValid
 {
@@ -27,7 +27,7 @@ class EnsureTokenIsValid
 
         $token = Token::find($data['id'] ?? null);
 
-        if (!$token || $token->used || now()->gt($token->expires_at)) {
+        if (! $token || $token->used || now()->gt($token->expires_at)) {
             return response()->json(['error' => 'The token expired.'], 401);
         }
 

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
+use App\Models\User;
 use App\Services\ImageOptimizationService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller implements HasMiddleware
@@ -26,7 +26,7 @@ class UserController extends Controller implements HasMiddleware
         ];
     }
 
-    public function index (Request $request)
+    public function index(Request $request)
     {
         $request->validate([
             'count' => 'integer|min:1|max:100',
@@ -48,41 +48,41 @@ class UserController extends Controller implements HasMiddleware
         return new UserCollection($users);
     }
 
-    public function show (string $id)
+    public function show(string $id)
     {
-        if (!ctype_digit($id)) {
+        if (! ctype_digit($id)) {
             return response()->json([
                 'success' => false,
                 'message' => 'The user with the requested id does not exist.',
                 'fails' => [
-                    'userId' => ['The user ID must be an integer.']
-                ]
+                    'userId' => ['The user ID must be an integer.'],
+                ],
             ], 400);
         }
 
         $user = User::find($id);
 
-        if (!$user) {
+        if (! $user) {
             return response()->json([
                 'success' => false,
-                'message' => 'User not found'
+                'message' => 'User not found',
             ], 404);
         }
 
         return response()->json([
             'success' => true,
-            'user' => new UserResource($user)
+            'user' => new UserResource($user),
         ]);
     }
 
-    public function store (StoreUserRequest $request)
+    public function store(StoreUserRequest $request)
     {
         $validated = $request->validated();
-        
+
         $originalPhotoName = $validated['photo']->getClientOriginalName();
         $originalPhotoPath = Storage::disk('public')->put('images/users/original', $validated['photo']);
         $optimizedPhotoPath = $this->imageOptimizationService->optimizeAndResize($originalPhotoPath);
-                
+
         $user = User::create([
             'name' => $validated['name'],
             'email' => strtolower($validated['email']),
@@ -101,6 +101,6 @@ class UserController extends Controller implements HasMiddleware
             'success' => true,
             'id' => $user->id,
             'message' => 'new user successfully registered',
-        ],201);
+        ], 201);
     }
 }

@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UserPhoto extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'original_name',
         'path_to_original',

@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Position;
-use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Factories\Factory;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */

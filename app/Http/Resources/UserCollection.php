@@ -19,12 +19,12 @@ class UserCollection extends ResourceCollection
             'to' => $resource->lastItem(),
             'total_users' => $resource->total(),
             'links' => [
-                    'next_url' => $resource->nextPageUrl(),
-                    'previous_url' => $resource->previousPageUrl(),
-                ],
+                'next_url' => $resource->nextPageUrl(),
+                'previous_url' => $resource->previousPageUrl(),
+            ],
 
         ];
-        
+
         $resource = $resource->getCollection();
 
         parent::__construct($resource);

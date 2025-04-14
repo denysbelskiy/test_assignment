@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Position;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PositionCollection;
 use App\Http\Resources\PositionResource;
+use App\Models\Position;
 
 class PositionController extends Controller
 {

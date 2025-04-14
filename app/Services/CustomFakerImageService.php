@@ -20,7 +20,7 @@ class CustomFakerImageService
         $response = Http::get('https://thispersondoesnotexist.com/');
 
         if ($response->successful()) {
-            $fileName = uniqid() . '.jpeg';
+            $fileName = uniqid().'.jpeg';
             $filePath = "images/users/original/$fileName";
 
             Storage::disk('public')->put($filePath, $response->body());

@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\File;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -38,6 +37,7 @@ class StoreUserRequest extends FormRequest
             ],
         ];
     }
+
     public function messages()
     {
         return [

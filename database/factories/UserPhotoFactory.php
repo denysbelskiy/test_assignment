@@ -20,7 +20,8 @@ class UserPhotoFactory extends Factory
     public function definition(): array
     {
         $originalPhotoPath = (new CustomFakerImageService)->fetchAndStoreImage();
-        $optimizedPhotoPath = (new ImageOptimizationService())->optimizeAndResize($originalPhotoPath);
+        $optimizedPhotoPath = (new ImageOptimizationService)->optimizeAndResize($originalPhotoPath);
+
         return [
             'original_name' => 'download.jpeg',
             'path_to_original' => $originalPhotoPath,

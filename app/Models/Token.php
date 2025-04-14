@@ -13,6 +13,7 @@ class Token extends Model
     ];
 
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     public function setToUsed()

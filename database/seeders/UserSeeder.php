@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\UserPhoto;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
@@ -18,9 +17,9 @@ class UserSeeder extends Seeder
             ->has(
                 UserPhoto::factory()
                     ->state(function (array $attributes, User $user) {
-                    return ['user_id' => $user->id];
-                })
-                )
+                        return ['user_id' => $user->id];
+                    })
+            )
             ->create();
     }
 }
