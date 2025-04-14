@@ -4,7 +4,7 @@ This repository contains the solution for the PHP Developer Test Assignment prov
 
 ## 🔗 Live Demo
 
-[View Deployed Project](https://your-live-deployment-link.com)
+[View Deployed Project](https://test-assignment-main-4oqw5j.laravel.cloud)
 
 ## 📂 Project Structure
 
