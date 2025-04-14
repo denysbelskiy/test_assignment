@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
+use App\Models\Token;
 use App\Models\User;
 use App\Services\ImageOptimizationService;
 use Illuminate\Http\Request;
@@ -77,6 +78,7 @@ class UserController extends Controller implements HasMiddleware
     {
         $validated = $request->validated();
 
+        $token = Token::find($request->attributes->get('token_id'));
         $originalPhotoName = $validated['photo']->getClientOriginalName();
         $originalPhotoPath = Storage::disk('public')->put('images/users/original', $validated['photo']);
         $optimizedPhotoPath = $this->imageOptimizationService->optimizeAndResize($originalPhotoPath);
@@ -94,6 +96,8 @@ class UserController extends Controller implements HasMiddleware
             'path' => $optimizedPhotoPath,
             'user_id' => $user->id,
         ]);
+
+        $token->setToUsed();
 
         return response()->json([
             'success' => true,

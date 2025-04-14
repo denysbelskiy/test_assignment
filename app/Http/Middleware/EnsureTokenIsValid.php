@@ -31,7 +31,7 @@ class EnsureTokenIsValid
             return response()->json(['error' => 'The token expired.'], 401);
         }
 
-        $token->setToUsed();
+        $request->attributes->set('token_id', $token['id']);
 
         return $next($request);
     }
