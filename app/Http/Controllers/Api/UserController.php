@@ -3,26 +3,24 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use App\Http\Resources\UserResource;
-use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\ImageOptimizationService;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller implements HasMiddleware
 {
-    public function __construct(private ImageOptimizationService $imageOptimizationService)
-    {
-    }
+    public function __construct(private ImageOptimizationService $imageOptimizationService) {}
 
     public static function middleware()
     {
-        return [ 
-            new Middleware ('token-validated', only: ['store']),
+        return [
+            new Middleware('token-validated', only: ['store']),
         ];
     }
 
