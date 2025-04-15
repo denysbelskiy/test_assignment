@@ -23,6 +23,10 @@ This repository contains the solution for the PHP Developer Test Assignment prov
 
 - Center-cropped image to 70x70 JPG
 - Optimized via [TinyPNG](https://tinypng.com/)
+- When truncating the DB you can run a command to clear storage from all images since they are unused:
+    ```bash
+    php artisan app:clear-storage
+    ```
 
 ### ✅ Authentication
 
